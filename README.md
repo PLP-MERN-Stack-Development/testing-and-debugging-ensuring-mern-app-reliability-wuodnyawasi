@@ -1,87 +1,202 @@
-# Testing and Debugging MERN Applications
+# MERN Stack Testing Assignment
 
-This assignment focuses on implementing comprehensive testing strategies for a MERN stack application, including unit testing, integration testing, and end-to-end testing, along with debugging techniques.
-
-## Assignment Overview
-
-You will:
-1. Set up testing environments for both client and server
-2. Write unit tests for React components and server functions
-3. Implement integration tests for API endpoints
-4. Create end-to-end tests for critical user flows
-5. Apply debugging techniques for common MERN stack issues
+This project demonstrates comprehensive testing strategies for a MERN (MongoDB, Express.js, React, Node.js) stack application. It includes unit tests, integration tests, and end-to-end tests to ensure application reliability.
 
 ## Project Structure
 
 ```
-mern-testing/
-├── client/                 # React front-end
-│   ├── src/                # React source code
+mern-testing-assignment/
+├── client/                 # React frontend
+│   ├── src/
 │   │   ├── components/     # React components
-│   │   ├── tests/          # Client-side tests
-│   │   │   ├── unit/       # Unit tests
-│   │   │   └── integration/ # Integration tests
-│   │   └── App.jsx         # Main application component
-│   └── cypress/            # End-to-end tests
-├── server/                 # Express.js back-end
-│   ├── src/                # Server source code
-│   │   ├── controllers/    # Route controllers
-│   │   ├── models/         # Mongoose models
-│   │   ├── routes/         # API routes
-│   │   └── middleware/     # Custom middleware
-│   └── tests/              # Server-side tests
-│       ├── unit/           # Unit tests
-│       └── integration/    # Integration tests
-├── jest.config.js          # Jest configuration
-└── package.json            # Project dependencies
+│   │   ├── hooks/         # Custom React hooks
+│   │   ├── tests/         # Unit tests for React
+│   │   └── ...
+│   ├── cypress/           # E2E tests
+│   └── package.json
+├── server/                 # Express.js backend
+│   ├── src/
+│   │   ├── models/        # MongoDB models
+│   │   ├── routes/        # API routes
+│   │   ├── utils/         # Utility functions
+│   │   └── app.js         # Main application
+│   ├── tests/             # Backend tests
+│   └── package.json
+├── package.json            # Root package.json with test scripts
+└── README.md
 ```
 
-## Getting Started
+## Features
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week6-Assignment.md` file
-4. Explore the starter code and existing tests
-5. Complete the tasks outlined in the assignment
+### Backend (Express.js + MongoDB)
+- User authentication (JWT)
+- CRUD operations for posts
+- Category management
+- Input validation
+- Error handling
 
-## Files Included
+### Frontend (React)
+- Authentication flow
+- Posts management
+- Responsive UI
+- Error boundaries
+- Custom hooks
 
-- `Week6-Assignment.md`: Detailed assignment instructions
-- Starter code for a MERN application with basic test setup:
-  - Sample React components with test files
-  - Express routes with test files
-  - Jest and testing library configurations
-  - Example tests for reference
+## Testing Strategy
 
-## Requirements
+### 1. Unit Testing
+- **Backend**: Models, utilities, and helper functions
+- **Frontend**: React components, custom hooks
+- Framework: Jest
+- Coverage: >70% for statements, branches, functions, and lines
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Basic understanding of testing concepts
+### 2. Integration Testing
+- API endpoints testing
+- Database operations
+- Authentication middleware
+- Framework: Jest + Supertest + MongoDB Memory Server
 
-## Testing Tools
+### 3. End-to-End Testing
+- User workflows (registration, login, logout)
+- CRUD operations
+- Form validation
+- Error handling
+- Framework: Cypress
 
-- Jest: JavaScript testing framework
-- React Testing Library: Testing utilities for React
-- Supertest: HTTP assertions for API testing
-- Cypress/Playwright: End-to-end testing framework
-- MongoDB Memory Server: In-memory MongoDB for testing
+## Installation & Setup
 
-## Submission
+1. **Install dependencies:**
+   ```bash
+   npm run install-all
+   ```
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+2. **Set up test database:**
+   ```bash
+   npm run setup-test-db
+   ```
 
-1. Complete all required tests (unit, integration, and end-to-end)
-2. Achieve at least 70% code coverage for unit tests
-3. Document your testing strategy in the README.md
-4. Include screenshots of your test coverage reports
-5. Demonstrate debugging techniques in your code
+3. **Start the application:**
+   ```bash
+   npm start
+   ```
 
-## Resources
+## Running Tests
 
-- [Jest Documentation](https://jestjs.io/docs/getting-started)
-- [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
-- [Supertest Documentation](https://github.com/visionmedia/supertest)
-- [Cypress Documentation](https://docs.cypress.io/)
-- [MongoDB Testing Best Practices](https://www.mongodb.com/blog/post/mongodb-testing-best-practices) 
+### All Tests
+```bash
+npm test
+```
+
+### Unit Tests Only
+```bash
+npm run test:unit
+```
+
+### Integration Tests Only
+```bash
+npm run test:integration
+```
+
+### End-to-End Tests
+```bash
+npm run test:e2e
+```
+
+### With Coverage
+```bash
+npm test -- --coverage
+```
+
+## Test Coverage
+
+The project maintains high test coverage across all layers:
+
+- **Statements**: >70%
+- **Branches**: >60%
+- **Functions**: >70%
+- **Lines**: >70%
+
+## Key Testing Features
+
+### Backend Testing
+- **Models**: Validation, data integrity, relationships
+- **Authentication**: JWT token generation/verification, password hashing
+- **API Routes**: CRUD operations, error handling, authorization
+- **Middleware**: Authentication, validation, error handling
+
+### Frontend Testing
+- **Components**: Rendering, props handling, user interactions
+- **Hooks**: State management, API calls, error handling
+- **Error Boundaries**: Error catching and recovery
+- **Forms**: Validation, submission, error display
+
+### E2E Testing
+- **User Journeys**: Registration → Login → CRUD operations → Logout
+- **UI Interactions**: Buttons, forms, navigation, responsive design
+- **API Integration**: Real API calls, data persistence
+- **Error Scenarios**: Network failures, validation errors, 404s
+
+## Debugging Techniques
+
+### Backend Debugging
+- **Logging**: Morgan middleware for HTTP request logging
+- **Error Handling**: Centralized error handling with detailed stack traces
+- **Database**: MongoDB query debugging, connection monitoring
+- **Validation**: Express-validator with detailed error messages
+
+### Frontend Debugging
+- **React DevTools**: Component inspection, state/prop tracking
+- **Console Logging**: API call logging, error tracking
+- **Network Tab**: API request/response monitoring
+- **Error Boundaries**: Graceful error handling and recovery
+
+### Testing Debugging
+- **Test Isolation**: Proper setup/teardown, mock cleanup
+- **Async Testing**: Proper handling of promises and async operations
+- **Mocking**: Axios, localStorage, and external dependencies
+- **Coverage Analysis**: Identifying untested code paths
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/profile` - Get user profile
+
+### Posts
+- `GET /api/posts` - Get all posts (with filtering/pagination)
+- `GET /api/posts/:id` - Get single post
+- `POST /api/posts` - Create new post
+- `PUT /api/posts/:id` - Update post
+- `DELETE /api/posts/:id` - Delete post
+
+## Environment Variables
+
+Create a `.env` file in the server directory:
+
+```env
+NODE_ENV=development
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/mern-testing
+JWT_SECRET=your-secret-key
+JWT_EXPIRE=7d
+```
+
+## Contributing
+
+1. Follow the existing code structure and naming conventions
+2. Write tests for new features before implementation
+3. Maintain test coverage above the minimum thresholds
+4. Use descriptive commit messages
+5. Update documentation for API changes
+
+## Technologies Used
+
+- **Backend**: Node.js, Express.js, MongoDB, Mongoose, JWT, bcrypt
+- **Frontend**: React, Axios, React Router
+- **Testing**: Jest, Supertest, Cypress, React Testing Library
+- **Development**: ESLint, Prettier, Nodemon
+
+## License
+
+This project is for educational purposes as part of a testing and debugging assignment.
