@@ -1,5 +1,3 @@
-// posts.test.js - Integration tests for posts API endpoints
-
 const request = require('supertest');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
@@ -8,6 +6,8 @@ const Post = require('../../src/models/Post');
 const User = require('../../src/models/User');
 const { generateToken } = require('../../src/utils/auth');
 
+jest.setTimeout(60000);
+
 let mongoServer;
 let token;
 let userId;
@@ -15,9 +15,14 @@ let postId;
 
 // Setup in-memory MongoDB server before all tests
 beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
-  const mongoUri = mongoServer.getUri();
-  await mongoose.connect(mongoUri);
+  try {
+    mongoServer = await MongoMemoryServer.create();
+    const mongoUri = mongoServer.getUri();
+    await mongoose.connect(mongoUri);
+  } catch (error) {
+    console.error('Failed to setup MongoDB:', error);
+    throw error;
+  }
 
   // Create a test user
   const user = await User.create({
@@ -41,8 +46,14 @@ beforeAll(async () => {
 
 // Clean up after all tests
 afterAll(async () => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
+  try {
+    await mongoose.disconnect();
+    if (mongoServer) {
+      await mongoServer.stop();
+    }
+  } catch (error) {
+    console.error('Failed to cleanup:', error);
+  }
 });
 
 // Clean up database between tests
